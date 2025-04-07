@@ -32,13 +32,13 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 npm install
 ```
 
-2. Start the server:
+2. Seed the database:
 
 ```bash
-npm start
+npm run seed
 ```
 
-For development with auto-restart:
+3. For development with auto-restart:
 
 ```bash
 npm run dev
