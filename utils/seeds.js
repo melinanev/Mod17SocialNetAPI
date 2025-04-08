@@ -72,7 +72,7 @@ const thoughts = [
       },
       {
         reactionBody: 'Makes working with MongoDB much easier.',
-        username: 'alex_tech'
+        username: 'lucy_dog'
       }
     ]
   }
