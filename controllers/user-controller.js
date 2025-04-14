@@ -3,15 +3,7 @@ const { User, Thought } = require('../models');
 const userController = {
   getAllUsers(req, res) {
     User.find({})
-      .populate({
-        path: 'thoughts',
-        select: '-__v'
-      })
-      .populate({
-        path: 'friends',
-        select: '-__v'
-      })
-      .select('-__v')
+      .select('-__v') 
       .then(dbUserData => res.json(dbUserData))
       .catch(err => {
         console.error(err);
@@ -65,8 +57,7 @@ const userController = {
     User.findOneAndDelete({ _id: params.id })
       .then(dbUserData => {
         if (!dbUserData) {
-          res.status(404).json({ message: 'No user found with this id!' });
-          return;
+          return res.status(404).json({ message: 'No user found with this id!' });
         }
         // Bonus: remove user's associated thoughts when deleted
         return Thought.deleteMany({ username: dbUserData.username });
@@ -74,7 +65,10 @@ const userController = {
       .then(() => {
         res.json({ message: 'User and associated thoughts deleted!' });
       })
-      .catch(err => res.status(400).json(err));
+      .catch(err => {
+        console.error(err);
+        res.status(500).json(err); // Ensure only one response is sent
+      });
   },
 
   addFriend({ params }, res) {
